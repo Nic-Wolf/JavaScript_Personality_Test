@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--**********************************************************
+Title:		Personality Test (Page 1 of 2)
+Site:		None
+Author:		Nic Wolf
+Revision:	1.0 (6/3/2014)
+***********************************************************-->
+<html>
+<head>
+	<title>Graph Prototype | Nic Wolf</title>
+	<style type="text/css">
+		h2 {
+			font-style: italic;
+		}
+
+		#wrapper {
+			font-family: sans-serif;
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		.graph {
+			padding: 0;
+			width: 300px;
+			float: left;
+			border: 3px solid #444;
+		}
+
+		.graph li {
+			position: relative;
+			list-style: none;
+			border-top: 1px solid #888;
+			clear: both;
+		}
+
+		.graph-item {
+			position: absolute;
+			margin-top: 0.5em; 
+			font: bolder 1.0em sans-serif;
+			z-index: 2;
+		}
+
+		.graph-value {
+			display: block;
+			text-align: right;
+			padding: 0.5em 1em;
+			position: relative;
+			color: #222;
+			background: #66EE99;
+			font-weight: bold;
+			float: left;
+			width: 1%;
+
+			/*Animations*/
+			transition: width 1s;
+			-webkit-transition: width 1s;
+			-moz-transition: width 1s;
+			-o-transition: width 1s;
+		}
+
+		.total {
+			margin-top: 5px;
+			padding: 0;
+			float: right;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="wrapper">
+		<h1>This is a Graph</h1>
+		<h2>with JavaScript!</h2>
+
+		<ul class="graph">
+			<li>
+				<span class="graph-item">STR</span>
+				<span class="graph-value" id="spnSTR">0</span>
+			</li>
+			<li>
+				<span class="graph-item">DEX</span>
+				<span class="graph-value" id="spnDEX">0</span>
+			</li>
+			<li>
+				<span class="graph-item">CON</span>
+				<span class="graph-value" id="spnCON">0</span>
+			</li>
+			<li>
+				<span class="graph-item">INT</span>
+				<span class="graph-value" id="spnINT">0</span>
+			</li>
+			<li>
+				<span class="graph-item">WIS</span>
+				<span class="graph-value" id="spnWIS">0</span>
+			</li>
+			<li>
+				<span class="graph-item">CHA</span>
+				<span class="graph-value" id="spnCHA">0</span>
+			</li>
+		</ul>
+
+		<br>
+		<a href='statcalc.html'><input type='button' value='Do It Again!'></a>
+	</div>
+</body>
+</html>
