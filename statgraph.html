@@ -3,7 +3,7 @@
 Title:		Personality Test (Page 1 of 2)
 Site:		None
 Author:		Nic Wolf
-Revision:	1.0 (6/3/2014)
+Revision:	1.0 (6/11/2014)
 ***********************************************************-->
 <html>
 <head>
@@ -46,7 +46,7 @@ Revision:	1.0 (6/3/2014)
 			padding: 0.5em 1em;
 			position: relative;
 			color: #222;
-			background: #66EE99;
+			background: #4ef08a;
 			font-weight: bold;
 			float: left;
 			width: 1%;
@@ -65,6 +65,80 @@ Revision:	1.0 (6/3/2014)
 		}
 	</style>
 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script type="text/javascript">
+	//Global Variables
+	var ARRAY_SIZE = 360; //Setting this number to something divisible by 18
+
+	$(document).ready(function() {
+		//Grab the empty Graph Elements
+		var STR = document.getElementById("spnSTR");
+		var DEX = document.getElementById("spnDEX");
+		var CON = document.getElementById("spnCON");
+		var INT = document.getElementById("spnINT");
+		var WIS = document.getElementById("spnWIS");
+		var CHA = document.getElementById("spnCHA");
+		//Assign graph values from URL values
+		var STRTotal = Number(GetURLParam("STRQ1")[0]) + Number(GetURLParam("STRQ2")[0]);
+
+		//Apply graph values
+		growth(STR, STRTotal);
+		growth(DEX, 10); //using fake numbers for now. Pass real values when test is complete
+		growth(CON, 7);
+		growth(INT, 4);
+		growth(WIS, 9);
+		growth(CHA, 3);	
+	});//end ready()
+
+
+	//Get the URL info, safe as string. Return needed values.
+	function GetURLParam(sParamName) {
+		var sParamString;
+		var a_sParams;
+		var a_sNameValue;
+		var a_sReturnValues = new Array();
+		var iValues = -1;
+		var iStartPos;
+		var sValue;
+
+		iStartPos = location.search.indexOf("?");
+
+		if (iStartPos > -1) {
+			sParamString = location.search.substr(iStartPos + 1);
+			a_sParams = sParamString.split("&");
+			for (var i = 0; i < a_sParams.length; i++) {
+				a_sNameValue = a_sParams[i].split("=");
+				a_sNameValue[0] = decodeURIComponent(a_sNameValue[0]); // in case the name contain brackets, e.g. chkHobbies[]
+				if (a_sNameValue[0] == sParamName) {
+					iValues++;
+					a_sReturnValues[iValues] = decodeURIComponent(a_sNameValue[1]);
+					a_sReturnValues[iValues] = a_sReturnValues[iValues].replace(/\+/g, ' '); // replace plus signs with spaces
+				}
+			}
+			return a_sReturnValues;
+		} else {
+			return false;
+		}
+	}//end GetURLParam()
+
+
+	//Use the values from the test to mark the growth rate of the stat bars
+	function growth(category, input) {
+		category.value = input; //Assign value from URL to a span
+
+		if (category.value <= ARRAY_SIZE) { 
+			for (var i = 0; i < category.value; i++) {
+				category.style.width = (i * 10) + "%";
+			}
+
+			category.innerHTML = i;
+		} else {
+			console.log("Something went wrong...");
+			return;
+		}
+	}//end growth()
+
+	</script>
 </head>
 <body>
 	<div id="wrapper">
