@@ -36,7 +36,7 @@
 
 		.graph-item {
 			position: absolute;
-			margin-top: 0.5em; 
+			margin-top: 0.5em;
 			font: bolder 1.0em sans-serif;
 			z-index: 2;
 		}
@@ -65,13 +65,13 @@
 			float: right;
 		}
 	</style>
-
+    <!--jQuery just for animations-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 	<script type="text/javascript">
 	//Global Variables
 	var ARRAY_SIZE = 360; //Setting this number to something divisible by 18
 
-	$(document).ready(function() {
+	applyDOMReadyState(function() {
 		//Grab the empty Graph Elements
 		var STR = document.getElementById("spnSTR");
 		var DEX = document.getElementById("spnDEX");
@@ -88,7 +88,7 @@
 		growth(CON, 7);
 		growth(INT, 4);
 		growth(WIS, 9);
-		growth(CHA, 3);	
+		growth(CHA, 3);
 	});//end ready()
 
 
@@ -127,7 +127,7 @@
 	function growth(category, input) {
 		category.value = input; //Assign value from URL to a span
 
-		if (category.value <= ARRAY_SIZE) { 
+		if (category.value <= ARRAY_SIZE) {
 			for (var i = 0; i < category.value; i++) {
 				category.style.width = (i * 10) + "%";
 			}
@@ -135,9 +135,25 @@
 			category.innerHTML = i;
 		} else {
 			console.log("Something went wrong...");
-			return;
 		}
 	}//end growth()
+
+    function applyDOMReadyState(callback) {
+        if (document.readyState.toLowerCase() !== 'loading') {
+            // Document is already rendered.
+            callback();
+        } else if (document.addEventListener) {
+            // Modern Browsers
+            document.addEventListener('DOMContentLoaded', callback);
+        } else {
+            // IE <= 8
+            document.attachEvent('onreadystatechange', function(){
+                if (document.readyState.toLowerCase() === 'complete') {
+                    callback();
+                }
+            });
+        }
+    }//end applyDOMReadyState()
 
 	</script>
 </head>
